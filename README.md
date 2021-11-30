@@ -1,1 +1,1 @@
-# color_detecting_program
+# Color-Detecting-Program
