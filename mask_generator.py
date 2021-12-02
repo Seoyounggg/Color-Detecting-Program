@@ -1,6 +1,5 @@
 # mask_generator.py
 # 11.28.2018
-# Project for "Computer Language" course
 
 from tkinter.filedialog import *
 from tkinter import *
