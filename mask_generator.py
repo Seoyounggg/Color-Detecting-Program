@@ -9,17 +9,13 @@ import numpy as np
 import cv2 as cv
 import tkinter
 
-
 hsv_ = []
 result = ''
 count = 0
 path = ''
 
-
 def func_open():
-
     global photo, img_color, filename, path, width, height
-
     try:
         filename = askopenfilename(parent=window, filetypes=(("JPG file", "*.jpg"), ("All files", "*.*")))
         if filename != '':
@@ -38,27 +34,21 @@ def func_open():
     except KeyError:
         pass
 
-
 def func_exit():
     window.quit()
     window.destroy()
 
-
 def clickMouse(event):
-
     # txt shows how many times the user clicked the image on window.
     txt = ""
-    
     global hsv, img_mask, count, img_hsv, filename, result, path
 
     if path != '':
         if event.num == 1:
-
             if count >= 3:
                 txt += "Exceeded the number of allowed clicks"
             else:
                 count += 1
-
                 color = img_color[event.y, event.x]
                 one_pixel = np.array([[color]])
 
@@ -80,21 +70,17 @@ def clickMouse(event):
                     pass
             label1.configure(text=txt)
 
-
 def mask_bound():
     global hsv_, img_hsv
-
     hsv_h = []
     hsv_s = []
     hsv_v = []
 
     if len(hsv_) == 3:
         for h, s, v in hsv_:
-
             hsv_h.append(h)
             hsv_s.append(s)
             hsv_v.append(v)
-
         h_mean = np.mean(hsv_h)
         h_std = np.std(hsv_h)
         s_mean = np.mean(hsv_s)
@@ -108,18 +94,14 @@ def mask_bound():
         img_mask = cv.inRange(img_hsv, lower_color, upper_color)
     return img_mask
 
-
 def show():
-
     global result
-
     if result != "":
         photo_2 = ImageTk.PhotoImage(file=result)
         pLabel2.configure(image=photo_2)
         pLabel2.image = photo_2
     else:
         pass
-
 
 window = Tk()
 window.geometry("500x400")
@@ -141,8 +123,8 @@ button.place(x=225, y=350)
 mainMenu = Menu(window)
 window.config(menu=mainMenu)
 fileMenu = Menu(mainMenu, tearoff=0)
-mainMenu.add_cascade(label="file", menu=fileMenu)
-fileMenu.add_command(label="open", command=func_open)
-fileMenu.add_command(label="exit", command=func_exit)
+mainMenu.add_cascade(label="FILE", menu=fileMenu)
+fileMenu.add_command(label="OPEN", command=func_open)
+fileMenu.add_command(label="EXIT", command=func_exit)
 
 window.mainloop()
